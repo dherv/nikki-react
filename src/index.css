@@ -1,0 +1,25 @@
+/* ./src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes slideIn {
+  100% {
+    right: 0;
+  }
+}
+
+@keyframes slideOut {
+  100% {
+    right: -300;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply block py-2 px-4 bg-green-300 text-white rounded shadow-md;
+  }
+  .title {
+    @apply font-bold text-lg text-gray-800 capitalize;
+  }
+}
