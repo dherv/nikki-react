@@ -4,19 +4,15 @@ import {
   CognitoUserPool,
 } from 'amazon-cognito-identity-js';
 import * as AWS from 'aws-sdk/global';
+import { User } from '../types/types';
 
 var poolData = {
   UserPoolId: process.env.REACT_APP_COGNITO_USER_POOL_ID as string, // Your user pool id here
   ClientId: process.env.REACT_APP_COGNITO_CLIENT_ID as string, // Your client id here
 };
 
-var userPool = new CognitoUserPool(poolData);
-
-export interface User {
-  username: string;
-  password: string;
-}
 export const login = ({ username, password }: User) => {
+  var userPool = new CognitoUserPool(poolData);
   return new Promise((resolve, reject) => {
     var userData = {
       Username: username,
@@ -43,9 +39,8 @@ export const login = ({ username, password }: User) => {
           IdentityPoolId: process.env.REACT_APP_COGNITO_IDENTITY_POOL_ID!, // your identity pool id here
           Logins: {
             // Change the key below according to the specific region your user pool is in.
-            [process.env.REACT_APP_COGNITO_ISSUER!]: result
-              .getIdToken()
-              .getJwtToken(),
+            [process.env
+              .REACT_APP_COGNITO_ISSUER!]: result.getIdToken().getJwtToken(),
           },
         });
 
