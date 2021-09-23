@@ -1,10 +1,9 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 export const Switch: FC<{
   isLogin: boolean;
   handleSwitch: () => void;
-}> = React.memo(({ isLogin, handleSwitch }) => {
-  console.log(isLogin, handleSwitch);
+}> = ({ isLogin, handleSwitch }) => {
   const text = isLogin ? "need an account ?" : "already have an account ?";
   const buttonText = isLogin ? "Register" : "Login";
   const paragraph = <p className="font-bold  mr-4 items-center">{text}</p>;
@@ -13,7 +12,6 @@ export const Switch: FC<{
       {buttonText}
     </button>
   );
-  console.log("render switch");
 
   return (
     <div className="mt-8 flex">
@@ -21,5 +19,7 @@ export const Switch: FC<{
       {button}
     </div>
   );
-});
+};
+
+// TODO: remove - keep as example for now - does not log when React.memo wraps the component
 Switch.whyDidYouRender = true;

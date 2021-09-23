@@ -1,6 +1,5 @@
-import { Profiler, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { onRenderCallback } from '../../app/render';
 import { TemplateAuth } from '../../components/templates/TemplateAuth';
 import { CognitoCode, login, register, RegisterData } from '../../lib/auth';
 import { User } from '../../types/types';
@@ -54,9 +53,7 @@ export const Auth = () => {
   // TODO: add animation on appear
 
   const current = isLogin ? (
-    <Profiler id="Login" onRender={onRenderCallback}>
-      <Login onLogin={handleLogin} error={error} />
-    </Profiler>
+    <Login onLogin={handleLogin} error={error} />
   ) : (
     <Register onRegister={handleRegister} error={error} />
   );

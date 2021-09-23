@@ -15,3 +15,5 @@ export const onRenderCallback = (
     interactions,
   });
 };
+
+// wrap component to benchmark with <Profiler id="Login" onRender={onRenderCallback}></Profile>
