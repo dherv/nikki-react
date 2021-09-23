@@ -3,48 +3,43 @@ import { Router } from 'react-router-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as auth from '../../lib/auth';
-import { Auth } from './Auth';
+import { Confirm } from './Confirm';
 
 jest.mock("../../lib/auth", () => ({
-  login: jest.fn().mockImplementation(() => Promise.resolve()),
+  confirm: jest.fn().mockImplementation(() => Promise.resolve()),
 }));
 
-describe("Auth component", () => {
+describe("Confirm component", () => {
   const history = createMemoryHistory();
   const pushSpy = jest.spyOn(history, "push"); // or 'replace', 'goBack', etc.
 
   beforeEach(() => {
     render(
       <Router history={history}>
-        <Auth></Auth>
+        <Confirm></Confirm>
       </Router>
     );
   });
   test("should complete the form and call login", async () => {
     const login = jest
-      .spyOn(auth, "login")
+      .spyOn(auth, "confirm")
       .mockImplementation(() => Promise.resolve());
     userEvent.type(screen.getByLabelText("username"), "bob");
-    userEvent.type(screen.getByLabelText("password"), "iambob");
+    userEvent.type(screen.getByLabelText("code"), "123456");
 
     await waitFor(() => {
       expect(/bob/).toBeDefined();
-      expect(/iambob/).toBeDefined();
+      expect(/123456/).toBeDefined();
     });
 
-    userEvent.click(screen.queryAllByRole("button")[0]);
+    userEvent.click(screen.getByRole("button"));
 
     await waitFor(() => {
       expect(login).toHaveBeenCalledWith({
         username: "bob",
-        password: "iambob",
+        code: "123456",
       });
-      expect(pushSpy).toHaveBeenCalledWith("/home");
+      expect(pushSpy).toHaveBeenCalledWith("/auth");
     });
-  });
-
-  test("should switch between login and register", () => {
-    userEvent.click(screen.getByText(/Register/));
-    expect(screen.getAllByText(/Login/)).toBeDefined();
   });
 });

@@ -9,10 +9,12 @@ export const TemplateAuth: FC = ({ children }) => {
         </nav>
       </header>
       <div
-        className="p-4 bg-gray-50 flex justify-center align-middle"
+        className="p-4 bg-gray-50 flex justify-center items-center"
         style={{ height: "calc(100vh - 28px - 32px)" }}
       >
-        {children}
+        <div className="w-full max-w-md h-3/5 flex flex-col justify-start">
+          {children}
+        </div>
       </div>
     </div>
   );
