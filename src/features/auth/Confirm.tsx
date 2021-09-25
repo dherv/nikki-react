@@ -18,7 +18,7 @@ export const Confirm: FC = () => {
 
   const handleChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     // adding target.value right in the setForm does not work in testing
-    //　https://github.com/testing-library/user-event/issues/533
+    // https://github.com/testing-library/user-event/issues/533
     const value = target.value;
     setForm((prev) => ({ ...prev, [target.name]: value }));
   };

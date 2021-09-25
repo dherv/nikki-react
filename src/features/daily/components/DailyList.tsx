@@ -13,7 +13,6 @@ export const DailyList: FC = () => {
 
   useEffect(() => {
     dispatch({ type: fetchDailiesRequest.type });
-    return () => {};
   }, [dispatch]);
 
   if (loading) return <p>loading</p>;

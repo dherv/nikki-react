@@ -7,6 +7,6 @@ export default {
   title: "Auth/Register",
 } as Meta;
 
-export const Primary: React.VFC<{}> = () => (
+export const Primary: React.VFC = () => (
   <Register onRegister={() => console.log("register")} error={null}></Register>
 );

@@ -46,7 +46,7 @@ const login = (username, password) => {
     .then((user) => {
       console.log("===> user", user);
 
-      let session = Auth.currentSession();
+      const session = Auth.currentSession();
 
       console.log("===> session", session);
     })
@@ -55,6 +55,7 @@ const login = (username, password) => {
 Cypress.Commands.add("login", login);
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {
     interface Chainable {
       login: typeof login;

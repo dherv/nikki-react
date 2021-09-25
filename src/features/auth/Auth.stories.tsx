@@ -7,4 +7,4 @@ export default {
   title: "Auth/Auth",
 } as Meta;
 
-export const Primary: React.VFC<{}> = () => <Auth></Auth>;
+export const Primary: React.VFC = () => <Auth></Auth>;

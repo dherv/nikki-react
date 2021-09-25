@@ -1,4 +1,5 @@
 import './index.css';
+import './mocks/browser';
 import './wdyr';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -10,8 +11,7 @@ import { store } from './app/store';
 import * as serviceWorker from './serviceWorker';
 
 if (process.env.NODE_ENV === "development") {
-  const { worker } = require("./mocks/browser");
-  worker.start();
+  import("./mocks/browser").then(({ worker }) => worker.start());
 }
 
 ReactDOM.render(

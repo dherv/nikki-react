@@ -7,6 +7,6 @@ export default {
   title: "Auth/Login",
 } as Meta;
 
-export const Primary: React.VFC<{}> = () => (
+export const Primary: React.VFC = () => (
   <Login onLogin={() => console.log("login")} error={null}></Login>
 );

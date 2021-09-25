@@ -7,4 +7,4 @@ export default {
   title: "Auth/Confirm",
 } as Meta;
 
-export const Primary: React.VFC<{}> = () => <Confirm></Confirm>;
+export const Primary: React.VFC = () => <Confirm></Confirm>;

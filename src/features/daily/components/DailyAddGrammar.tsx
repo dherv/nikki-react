@@ -3,8 +3,12 @@ import { Button } from '../../../components/Button';
 import { Input } from '../../../components/Input';
 
 export const DailyAddGrammar: FC = () => {
-  const handleChange = () => {};
-  const handleClick = () => {};
+  const handleChange = () => {
+    console.log("change");
+  };
+  const handleClick = () => {
+    console.log("click");
+  };
   return (
     <form>
       <h5>add grammar</h5>
