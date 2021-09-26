@@ -8,5 +8,5 @@ export default {
 } as Meta;
 
 export const Primary: React.VFC = () => (
-  <Login onLogin={() => console.log("login")} error={null}></Login>
+  <Login onLogin={() => console.info("login")} error={null}></Login>
 );

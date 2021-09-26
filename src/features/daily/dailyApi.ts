@@ -8,7 +8,6 @@ export const fetchDailies = () =>
     .then((response) => response.data.dailies);
 
 export const addDaily = (payload: any) => {
-  console.log({ payload });
   return client.mutate({
     mutation: ADD_DAILY_QUERY,
     variables: { input: payload },
@@ -19,7 +18,6 @@ export const searchWord = ({ payload }: any) => {
   return client
     .query({ query: QUERY_WORD_SEARCH, variables: { word: payload } })
     .then((response) => {
-      console.log({ response });
       return response.data.words;
     });
 };

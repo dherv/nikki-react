@@ -7,7 +7,7 @@ export const onRenderCallback = (
   commitTime: number,
   interactions: any
 ) => {
-  console.log({
+  console.info({
     id,
     phase,
     actualDuration,

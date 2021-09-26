@@ -21,7 +21,6 @@ export const DailyAdd: FC = () => {
 
   const handleMouseUp = () => {
     const selection = window.getSelection()?.toString();
-    console.log({ selection });
     if (selection && selection?.length > 0) {
       dispatch({ type: selectedWord.type, payload: selection });
     }
@@ -29,9 +28,7 @@ export const DailyAdd: FC = () => {
 
   const handleKeyUp = (event: KeyboardEvent<HTMLTextAreaElement>) => {
     const selection = window.getSelection()?.toString();
-    console.log("hey", selection);
     if (selection && selection?.length > 0) {
-      console.log({ selection });
       dispatch({ type: selectedWord.type, payload: selection });
     }
   };

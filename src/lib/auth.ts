@@ -59,7 +59,7 @@ export const login = ({ username, password }: User) => {
           } else {
             // Instantiate aws sdk service objects now that the credentials have been updated.
             // example: const s3 = new AWS.S3();
-            console.log("Successfully logged!");
+            console.info("Successfully logged!");
           }
         });
 
@@ -67,7 +67,6 @@ export const login = ({ username, password }: User) => {
       },
 
       onFailure: function (err) {
-        console.log(err);
         localStorage.removeItem("isAuth");
         reject(err);
       },
@@ -99,7 +98,7 @@ export const register = (data: RegisterData) => {
       }
       if (typeof result !== "undefined") {
         const cognitoUser = result.user;
-        console.log("user name is " + cognitoUser.getUsername());
+        console.info("user name is " + cognitoUser.getUsername());
         return resolve(cognitoUser);
       }
     };
@@ -123,7 +122,6 @@ export const confirm = (data: { username: string; code: string }) => {
         alert(err.message || JSON.stringify(err));
         return;
       }
-      console.log("call result: " + result);
       resolve(result);
     });
   });
@@ -138,14 +136,13 @@ export const userDetails = () => {
         alert(err.message || JSON.stringify(err));
         return;
       }
-      console.log("session validity: " + session.isValid());
+      console.info("session validity: " + session.isValid());
       if (cognitoUser != null) {
         // NOTE: getSession must be called to authenticate user before calling getUserAttributes
         cognitoUser.getUserAttributes(function (err, attributes) {
           if (err) {
             // Handle error
           } else {
-            console.log({ attributes });
             // Do something with attributes
           }
         });

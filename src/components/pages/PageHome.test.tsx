@@ -38,13 +38,13 @@ describe("PageHome component", () => {
     });
 
     test.skip("click add on word add it to daily word list", () => {
-      console.log("todo");
+      console.warn("todo");
     });
     test.skip("click add on searched word add it to daily word list", () => {
-      console.log("todo");
+      console.warn("todo");
     });
     test.skip("click remove word remove it to daily word list", () => {
-      console.log("todo");
+      console.warn("todo");
     });
   });
 

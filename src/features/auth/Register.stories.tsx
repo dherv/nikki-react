@@ -8,5 +8,5 @@ export default {
 } as Meta;
 
 export const Primary: React.VFC = () => (
-  <Register onRegister={() => console.log("register")} error={null}></Register>
+  <Register onRegister={() => console.info("register")} error={null}></Register>
 );

@@ -4,10 +4,10 @@ import { Input } from '../../../components/base/Input';
 
 export const DailyAddGrammar: FC = () => {
   const handleChange = () => {
-    console.log("change");
+    console.info("change");
   };
   const handleClick = () => {
-    console.log("click");
+    console.info("click");
   };
   return (
     <form>

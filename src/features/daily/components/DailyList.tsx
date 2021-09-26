@@ -11,7 +11,6 @@ export const DailyList: FC = () => {
     (state: RootStateOrAny) => state.dailies.loading
   );
   const error = useAppSelector((state: RootStateOrAny) => state.dailies.error);
-  console.log({ dailies });
   useEffect(() => {
     dispatch({ type: fetchDailiesRequest.type });
   }, [dispatch]);
