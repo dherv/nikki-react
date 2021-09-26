@@ -5,6 +5,7 @@
   "dependencies": {
     "@apollo/client": "^3.4.8",
     "@craco/craco": "^6.2.0",
+    "@heroicons/react": "^1.0.4",
     "@reduxjs/toolkit": "^1.5.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.0",
@@ -34,7 +35,7 @@
     "start": "craco start",
     "build": "craco build",
     "test:commit": "craco test --watchAll=false",
-    "test": "craco test --watchAll=false",
+    "test": "craco test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s ./public",
     "build-storybook": "build-storybook -s ./public",

@@ -1,8 +1,6 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import {
-  DailyAddHighlightList,
-} from '../../features/daily/components/DailyAddHighlightList';
+import { XIcon } from '@heroicons/react/solid';
 import { DailyAddWord } from '../../features/daily/components/DailyAddWord';
 import {
   DailyWordGrammarSearchList,
@@ -25,8 +23,12 @@ export const Aside: FC<{ onClick: () => void; show: boolean }> = ({
 }) => {
   return (
     <StyledAside show={show} className="p-4">
-      <button onClick={onClick}>close</button>
-      <DailyAddHighlightList />
+      <XIcon
+        role="icon"
+        aria-label="close icon"
+        onClick={onClick}
+        className="h-5 w-5 cursor-pointer ml-auto"
+      />
       <DailyAddWord />
       <DailyWordGrammarSearchList />
     </StyledAside>

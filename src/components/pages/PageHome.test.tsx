@@ -58,11 +58,11 @@ describe("PageHome component", () => {
       expect(await screen.findAllByText("test")).toHaveLength(2);
     });
     test("header click open sidebar", () => {
-      userEvent.click(screen.getByRole("button", { name: /show/ }));
+      userEvent.click(screen.getByRole("icon", { name: /menu icon/ }));
       expect(screen.getByRole("complementary")).toHaveStyle({ right: 0 });
     });
     test("aside click close sidebar", () => {
-      userEvent.click(screen.getByRole("button", { name: /close/ }));
+      userEvent.click(screen.getByRole("icon", { name: /close icon/ }));
       expect(screen.getByRole("complementary")).toHaveStyle({
         right: "-300px",
       });

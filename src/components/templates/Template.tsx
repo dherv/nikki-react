@@ -19,7 +19,7 @@ export const Template: FC = ({ children }) => {
 
   return (
     <div className="p-4 h-screen bg-gray-50">
-      <Header onClick={() => setShow((prev) => !prev)} />
+      <Header onClick={() => setShow((prev) => !prev)} show={show} />
       <div className="flex overflow-auto">
         <StyledMain className="p-4 mt-8" show={show}>
           {children}
