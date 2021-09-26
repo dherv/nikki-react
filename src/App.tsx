@@ -5,7 +5,7 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import { Main } from './components/Main';
+import { PageHome } from './components/pages/PageHome';
 import { Auth } from './features/auth/Auth';
 import { Confirm } from './features/auth/Confirm';
 
@@ -23,7 +23,7 @@ function App() {
             <Auth routeToRedirect="/home" store="storeCallback" appName="Nikki" pageColor="" btnColor="" inputColor="" api={login: ()=> void, register: () => void ...}/>
          */}
 
-        <Route exact path="/home" component={Main}></Route>
+        <Route exact path="/home" component={PageHome}></Route>
         <Route exact path="/auth" component={Auth}></Route>
         <Route exact path="/confirm" component={Confirm} />
         <Route exact path="/">

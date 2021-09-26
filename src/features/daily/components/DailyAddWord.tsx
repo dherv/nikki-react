@@ -1,8 +1,8 @@
 import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import { useAppDispatch } from '../../../app/hooks';
-import { Button } from '../../../components/Button';
-import { Input } from '../../../components/Input';
+import { Button } from '../../../components/base/Button';
+import { Input } from '../../../components/base/Input';
 import { dailySearchWordRequest, formAddWord } from '../dailySlice';
 
 type Form = {

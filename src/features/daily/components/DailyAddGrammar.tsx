@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { Button } from '../../../components/Button';
-import { Input } from '../../../components/Input';
+import { Button } from '../../../components/base/Button';
+import { Input } from '../../../components/base/Input';
 
 export const DailyAddGrammar: FC = () => {
   const handleChange = () => {

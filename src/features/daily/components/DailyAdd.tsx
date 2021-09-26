@@ -1,10 +1,12 @@
-import { ChangeEvent, FC, MouseEvent } from 'react';
+import { ChangeEvent, FC, KeyboardEvent, MouseEvent } from 'react';
+import { RootStateOrAny, useSelector } from 'react-redux';
 import { useAppDispatch } from '../../../app/hooks';
-import { Button } from '../../../components/Button';
+import { Button } from '../../../components/base/Button';
 import { addDailyRequest, formAddText, selectedWord } from '../dailySlice';
 
 export const DailyAdd: FC = () => {
   const dispatch = useAppDispatch();
+  const value = useSelector((state: RootStateOrAny) => state.dailies.form.text);
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -17,9 +19,19 @@ export const DailyAdd: FC = () => {
     dispatch({ type: formAddText.type, payload: event.target.value });
   };
 
-  const handleMouseUp = (event: MouseEvent) => {
+  const handleMouseUp = () => {
     const selection = window.getSelection()?.toString();
+    console.log({ selection });
     if (selection && selection?.length > 0) {
+      dispatch({ type: selectedWord.type, payload: selection });
+    }
+  };
+
+  const handleKeyUp = (event: KeyboardEvent<HTMLTextAreaElement>) => {
+    const selection = window.getSelection()?.toString();
+    console.log("hey", selection);
+    if (selection && selection?.length > 0) {
+      console.log({ selection });
       dispatch({ type: selectedWord.type, payload: selection });
     }
   };
@@ -28,9 +40,14 @@ export const DailyAdd: FC = () => {
     <form className="w-full	">
       <textarea
         rows={10}
+        id="daily"
+        name="daily"
+        aria-label="daily"
         className="w-full p-4 my-4 text-gray-700 rounded shadow-lg resize-none focus:outline-none"
         onChange={handleChange}
         onMouseUp={handleMouseUp}
+        onKeyUp={handleKeyUp}
+        value={value}
       ></textarea>
       <Button onClick={handleClick}>submit</Button>
     </form>

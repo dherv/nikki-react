@@ -1,44 +1,50 @@
 // src/mocks/handlers.js
 import { graphql } from 'msw';
 
-export const handlers = [
-  // Handles a "Login" mutation
-  graphql.mutation("Login", (req, res, ctx) => {
-    const { username } = req.variables;
-    sessionStorage.setItem("is-authenticated", username);
+let dailyList = [
+  {
+    id: "2",
+    text: "test",
+    translation: "",
+    words: [],
+    grammars: [],
+    __typename: "Daily",
+  },
+  {
+    id: "1",
+    text: "test",
+    translation: "",
+    words: [],
+    grammars: [],
+    __typename: "Daily",
+  },
+];
 
+export const handlers = [
+  graphql.query("FetchDailies", (req, res, ctx) => {
     return res(
       ctx.data({
-        login: {
-          username,
-        },
+        dailies: dailyList,
       })
     );
   }),
 
-  // Handles a "GetUserInfo" query
-  graphql.query("GetUserInfo", (req, res, ctx) => {
-    const authenticatedUser = sessionStorage.getItem("is-authenticated");
+  graphql.mutation("AddDaily", (req, res, ctx) => {
+    const { variables } = req.body as any;
+    const newDaily = {
+      id: "3",
+      text: variables.input.text,
+      translation: "",
+      words: [],
+      grammars: [],
+      __typename: "Daily",
+    };
 
-    if (!authenticatedUser) {
-      // When not authenticated, respond with an error
-      return res(
-        ctx.errors([
-          {
-            message: "Not authenticated",
-            errorType: "AuthenticationError",
-          },
-        ])
-      );
-    }
-
-    // When authenticated, respond with a query payload
+    // add the item so it gets in the list in next call
+    dailyList = [newDaily, ...dailyList];
     return res(
       ctx.data({
-        user: {
-          username: authenticatedUser,
-          firstName: "John",
-        },
+        addDaily: newDaily,
       })
     );
   }),

@@ -1,6 +1,7 @@
 import { FC, useEffect } from 'react';
 import { RootStateOrAny } from 'react-redux';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { Daily } from '../../../types/types';
 import { fetchDailiesRequest } from '../dailySlice';
 
 export const DailyList: FC = () => {
@@ -10,7 +11,7 @@ export const DailyList: FC = () => {
     (state: RootStateOrAny) => state.dailies.loading
   );
   const error = useAppSelector((state: RootStateOrAny) => state.dailies.error);
-
+  console.log({ dailies });
   useEffect(() => {
     dispatch({ type: fetchDailiesRequest.type });
   }, [dispatch]);
@@ -23,7 +24,7 @@ export const DailyList: FC = () => {
         Your Latest
       </h2>
       <ul>
-        {dailies.map((d: any) => (
+        {dailies.map((d: Daily) => (
           <li
             className="w-full	my-4 px-2 py-4 text-gray-800 shadow-md bg-white"
             key={d.id}

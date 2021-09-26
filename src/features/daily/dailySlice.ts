@@ -56,12 +56,15 @@ export const dailySlice = createSlice({
       state.addLoading = false;
       state.addError = null;
       state.form = initialState.form;
+      console.log(action.payload.data.addDaily);
+      state.data.push(action.payload.data.addDaily);
     },
     addDailyFailure: (state, action) => {
       state.addLoading = false;
       state.addError = action.payload;
     },
     selectedWord: (state, action) => {
+      console.log(action.payload, "SELECTED");
       state.selectedWord = action.payload;
     },
     formAddText: (state, action) => {

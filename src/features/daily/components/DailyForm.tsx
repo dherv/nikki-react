@@ -3,6 +3,7 @@ import { DailyAdd } from './DailyAdd';
 import { DailyWordGrammarList } from './DailyWordGrammarList';
 
 export const DailyForm: FC = () => {
+  // TODO: move children logic here and add integration tests
   return (
     <>
       <h2 className="mr-auto my-2 title">Add today's daily</h2>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router';
 import { ChangeEvent, FC } from 'react-router/node_modules/@types/react';
-import { Button } from '../../components/Button';
+import { Button } from '../../components/base/Button';
 import { TemplateAuth } from '../../components/templates/TemplateAuth';
 import { confirm } from '../../lib/auth';
 

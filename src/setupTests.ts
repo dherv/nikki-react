@@ -3,8 +3,11 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom/extend-expect';
+import dotenv from 'dotenv';
 // src/setupTests.js
 import { server } from './mocks/server';
+
+dotenv.config({ path: "./.env.local" });
 
 // Establish API mocking before all tests.
 beforeAll(() => server.listen());

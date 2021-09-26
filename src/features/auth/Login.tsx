@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ChangeEvent, FC } from 'react-router/node_modules/@types/react';
-import { Button } from '../../components/Button';
+import { Button } from '../../components/base/Button';
 import { User } from '../../types/types';
 
 export const Login: FC<{
@@ -18,7 +18,6 @@ export const Login: FC<{
 
   const handleClick = () => onLogin(form);
 
-  console.log("render login");
   return (
     <form
       className="block w-full p-8 bg-white shadow-md rounded-lg"
