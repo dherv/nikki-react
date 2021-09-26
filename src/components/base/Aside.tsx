@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import styled from 'styled-components';
 import {
   DailyAddHighlightList,
 } from '../../features/daily/components/DailyAddHighlightList';
@@ -7,38 +8,27 @@ import {
   DailyWordGrammarSearchList,
 } from '../../features/daily/components/DailyWordGrammarSearchList';
 
-const slideInStyle: any = {
-  position: "fixed",
-  right: 0,
-  top: 0,
-  bottom: 0,
-  background: "white",
-  width: 300,
-  transition: "all 0.3s linear",
-  "-webkit-transition": "all 0.3s linear",
-};
-
-const slideOutStyle: any = {
-  position: "fixed",
-  right: -300,
-  width: 300,
-  top: 0,
-  bottom: 0,
-  background: "white",
-  transition: "all 0.3s linear",
-  "-webkit-transition": "all 0.3s linear",
-};
+const StyledAside = styled.aside<{ show: boolean }>`
+  position: fixed;
+  right: ${({ show }) => (show ? 0 : -300)}px;
+  width: 300;
+  top: 0;
+  bottom: 0;
+  background: #fff;
+  transition: all 0.3s linear;
+  -webkit-transition: all 0.3s linear;
+`;
 
 export const Aside: FC<{ onClick: () => void; show: boolean }> = ({
   onClick,
   show,
 }) => {
   return (
-    <aside style={show ? slideInStyle : slideOutStyle} className="p-4">
+    <StyledAside show={show} className="p-4">
       <button onClick={onClick}>close</button>
       <DailyAddHighlightList />
       <DailyAddWord />
       <DailyWordGrammarSearchList />
-    </aside>
+    </StyledAside>
   );
 };

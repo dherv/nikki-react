@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { TemplateAuth } from '../../components/templates/TemplateAuth';
 import { CognitoCode, login, register, RegisterData } from '../../lib/auth';
@@ -7,7 +7,7 @@ import { Login } from './Login';
 import { Register } from './Register';
 import { Switch } from './Switch';
 
-export const Auth = () => {
+export const Auth: FC = () => {
   const history = useHistory();
   const [isLogin, setIsLogin] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);

@@ -43,9 +43,7 @@ Amplify.configure({
 
 const login = (username, password) => {
   return Auth.signIn(username, password)
-    .then((user) => {
-      const session = Auth.currentSession();
-    })
+    .then(() => Auth.currentSession())
     .catch((err) => console.error("===> err", err));
 };
 Cypress.Commands.add("login", login);

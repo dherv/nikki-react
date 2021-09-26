@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, KeyboardEvent, MouseEvent } from 'react';
+import { ChangeEvent, FC, MouseEvent } from 'react';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import { useAppDispatch } from '../../../app/hooks';
 import { Button } from '../../../components/base/Button';
@@ -26,7 +26,7 @@ export const DailyAdd: FC = () => {
     }
   };
 
-  const handleKeyUp = (event: KeyboardEvent<HTMLTextAreaElement>) => {
+  const handleKeyUp = () => {
     const selection = window.getSelection()?.toString();
     if (selection && selection?.length > 0) {
       dispatch({ type: selectedWord.type, payload: selection });

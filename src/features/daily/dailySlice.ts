@@ -1,4 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { RootStateOrAny } from 'react-redux';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { IDaily, IDailyForm, IGrammar, IWord } from '../../app/types';
 
 interface InitialState {
@@ -52,11 +53,10 @@ export const dailySlice = createSlice({
     addDailyRequest: (state) => {
       state.addLoading = true;
     },
-    addDailySuccess: (state, action) => {
+    addDailySuccess: (state) => {
       state.addLoading = false;
       state.addError = null;
       state.form = initialState.form;
-      state.data.push(action.payload.data.addDaily);
     },
     addDailyFailure: (state, action) => {
       state.addLoading = false;
@@ -90,7 +90,7 @@ export const dailySlice = createSlice({
     formAddHighlight: (state, action) => {
       state.form.highlights.push(action.payload);
     },
-    dailySearchWordRequest: (state, action) => {
+    dailySearchWordRequest: (state) => {
       state.search.loading = true;
     },
     dailySearchWordSuccess: (state, action) => {
@@ -125,3 +125,8 @@ export const {
 } = dailySlice.actions;
 
 export default dailySlice.reducer;
+
+export const dailyFormSelector = createSelector(
+  (state: RootStateOrAny) => state,
+  (state: RootStateOrAny) => state.dailies.form
+);

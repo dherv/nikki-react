@@ -1,4 +1,5 @@
 import './App.css';
+import { FC } from 'react';
 import {
   BrowserRouter as Router,
   Redirect,
@@ -9,7 +10,7 @@ import { PageHome } from './components/pages/PageHome';
 import { Auth } from './features/auth/Auth';
 import { Confirm } from './features/auth/Confirm';
 
-function App() {
+const App: FC = () => {
   return (
     <Router>
       <Switch>
@@ -36,6 +37,6 @@ function App() {
       </Switch>
     </Router>
   );
-}
+};
 
 export default App;

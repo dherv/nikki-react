@@ -1,8 +1,10 @@
 import { call, put, select, takeLatest } from '@redux-saga/core/effects';
+import { Grammar, Word } from '../../types/types';
 import { addDaily, fetchDailies, searchWord } from './dailyApi';
 import {
   addDailyRequest,
   addDailySuccess,
+  dailyFormSelector,
   dailySearchWordRequest,
   dailySearchWordSuccess,
   fetchDailiesRequest,
@@ -20,16 +22,23 @@ function* handleFetchDailies(): Generator {
 }
 
 function* handleAddDaily(): Generator {
+  type Form = {
+    text: string;
+    translation: string;
+    words: Word[];
+    grammars: Grammar[];
+  };
   try {
-    const form: any = yield select((state) => state.dailies.form);
+    const form = (yield select(dailyFormSelector)) as Form;
+    const dailyRequest = {
+      text: form.text,
+      translation: form.translation,
+      word: form.words,
+      grammar: form.grammars,
+    };
     if (form.text) {
-      const result = yield call(addDaily, {
-        text: form.text,
-        translation: form.translation,
-        word: form.words,
-        grammar: form.grammars,
-      });
-      yield put(addDailySuccess(result));
+      yield call(addDaily, dailyRequest);
+      yield put(addDailySuccess());
     }
   } catch (e) {
     console.error({ e });
@@ -39,7 +48,7 @@ function* handleAddDaily(): Generator {
 
 function* handleDailySearchWord(payload: any): Generator {
   try {
-    const result = yield call(searchWord, payload) as any;
+    const result = yield call(searchWord, payload);
     yield put(dailySearchWordSuccess(result));
   } catch (e) {
     console.error({ e });

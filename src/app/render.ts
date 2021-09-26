@@ -1,12 +1,14 @@
-export const onRenderCallback = (
+import { ProfilerOnRenderCallback } from 'react';
+
+export const onRenderCallback: ProfilerOnRenderCallback = (
   id: string,
   phase: string,
   actualDuration: number,
   baseDuration: number,
   startTime: number,
   commitTime: number,
-  interactions: any
-) => {
+  interactions: unknown
+): void =>
   console.info({
     id,
     phase,
@@ -14,6 +16,5 @@ export const onRenderCallback = (
     baseDuration,
     interactions,
   });
-};
 
 // wrap component to benchmark with <Profiler id="Login" onRender={onRenderCallback}></Profile>
