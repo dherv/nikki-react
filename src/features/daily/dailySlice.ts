@@ -63,7 +63,6 @@ export const dailySlice = createSlice({
       state.addLoading = true;
     },
     addDailySuccess: (state, action) => {
-      console.log(action.payload, action.payload.words);
       state.data = [...state.data, action.payload];
       state.words.data = [...state.words.data, ...action.payload.words];
       state.addLoading = false;

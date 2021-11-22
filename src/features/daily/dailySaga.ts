@@ -67,7 +67,6 @@ function* handleAddDaily(): Generator {
     if (form.text) {
       const response = yield call(addDaily, dailyRequest);
       const payload = response;
-      console.log({ payload, response });
       yield put(addDailySuccess(payload));
     }
   } catch (e) {

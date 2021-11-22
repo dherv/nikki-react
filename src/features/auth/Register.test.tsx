@@ -7,6 +7,7 @@ describe("Login component", () => {
     onChange: jest.fn(),
     onLogin: jest.fn(),
     form: { username: "", password: "" },
+    error: null,
   };
   beforeEach(() => {
     render(<Login {...props}></Login>);
