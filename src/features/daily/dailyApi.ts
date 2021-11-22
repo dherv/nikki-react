@@ -12,7 +12,7 @@ import {
 import { Daily, Word } from '../../types/types';
 
 // MUTATIONS
-export const addDaily = (payload: any): Promise<any> =>
+export const addDaily = (payload: unknown): Promise<any> =>
   client
     .mutate({
       mutation: ADD_DAILY_MUTATION,
@@ -20,7 +20,7 @@ export const addDaily = (payload: any): Promise<any> =>
     })
     .then(({ data }) => data.addDaily);
 
-export const deleteDaily = (id: any): Promise<any> => {
+export const deleteDaily = (id: string): Promise<any> => {
   return client
     .mutate({
       mutation: DELETE_DAILY_MUTATION,
@@ -29,7 +29,7 @@ export const deleteDaily = (id: any): Promise<any> => {
     .then(({ data }) => data.deleteDaily);
 };
 
-export const deleteWord = (id: any): Promise<any> => {
+export const deleteWord = (id: string): Promise<any> => {
   return client
     .mutate({
       mutation: DELETE_WORD_MUTATION,
@@ -56,7 +56,7 @@ export const searchWord = ({ payload }: { payload: Word }): Promise<Word[]> =>
     })
     .then((response) => response.data.words);
 
-export const fetchWords = () => {
+export const fetchWords = (): Promise<unknown> => {
   return client
     .query({ query: FETCH_WORD_QUERY, fetchPolicy: "network-only" })
     .then((response) => response.data.words);

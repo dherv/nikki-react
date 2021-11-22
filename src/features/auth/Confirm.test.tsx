@@ -23,7 +23,7 @@ describe("Confirm component", () => {
   test("should complete the form and call login", async () => {
     const login = jest
       .spyOn(auth, "confirm")
-      .mockImplementation(() => Promise.resolve());
+      .mockImplementation(() => Promise.resolve({} as any));
     userEvent.type(screen.getByLabelText("username"), "bob");
     userEvent.type(screen.getByLabelText("code"), "123456");
 

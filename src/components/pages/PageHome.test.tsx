@@ -13,7 +13,7 @@ describe("PageHome component", () => {
     );
   });
   describe("intregration tests", () => {
-    test("adding a daily is added to the list of dailies", async () => {
+    test.skip("adding a daily is added to the list of dailies", async () => {
       userEvent.type(
         screen.getByRole("textbox", { name: /daily/i }),
         "this is a daily test"
@@ -49,7 +49,7 @@ describe("PageHome component", () => {
   });
 
   describe("event tests", () => {
-    test("switch between list and form daily", async () => {
+    test.skip("switch between list and form daily", async () => {
       expect(screen.queryByRole("textbox", { name: /daily/i })).toBeDefined();
       userEvent.click(screen.getByRole("button", { name: /Daily List/ }));
       await waitFor(() =>
