@@ -1,8 +1,9 @@
 import { FC, useEffect } from 'react';
 import { RootStateOrAny } from 'react-redux';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { ListItem } from '../../../components/base/ListItem';
 import { Daily } from '../../../types/types';
-import { fetchDailiesRequest } from '../dailySlice';
+import { deleteDailyRequest, fetchDailiesRequest } from '../dailySlice';
 
 export const DailyList: FC = () => {
   const dispatch = useAppDispatch();
@@ -11,6 +12,7 @@ export const DailyList: FC = () => {
     (state: RootStateOrAny) => state.dailies.loading
   );
   const error = useAppSelector((state: RootStateOrAny) => state.dailies.error);
+
   useEffect(() => {
     dispatch({ type: fetchDailiesRequest.type });
   }, [dispatch]);
@@ -18,20 +20,16 @@ export const DailyList: FC = () => {
   if (loading) return <p>loading</p>;
   if (error) return <p>{error}</p>;
   return (
-    <div className="w-3/4">
-      <h2 className="mr-auto my-2 font-bold text-md text-gray-800">
-        Your Latest
-      </h2>
-      <ul>
-        {dailies.map((d: Daily) => (
-          <li
-            className="w-full	my-4 px-2 py-4 text-gray-800 shadow-md bg-white"
-            key={d.id}
-          >
-            {d.text}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul>
+      {dailies.map((d: Daily) => (
+        <ListItem
+          key={d.id}
+          text={d.text}
+          onClickDelete={() =>
+            dispatch({ type: deleteDailyRequest.type, payload: d.id })
+          }
+        />
+      ))}
+    </ul>
   );
 };

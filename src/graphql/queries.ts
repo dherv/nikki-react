@@ -18,9 +18,19 @@ export const FETCH_DAILIES_QUERY = gql`
   }
 `;
 
-export const QUERY_WORD_SEARCH = gql`
+export const SEARCH_WORD_QUERY = gql`
   query SearchWord($word: WordRequest) {
     words: searchWord(word: $word) {
+      id
+      text
+      translation
+    }
+  }
+`;
+
+export const FETCH_WORD_QUERY = gql`
+  query FetchWords {
+    words {
       id
       text
       translation

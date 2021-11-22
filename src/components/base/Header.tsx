@@ -14,11 +14,9 @@ export const Header: FC<{ show: boolean; onClick: () => void }> = ({
     />
   );
   return (
-    <header>
-      <nav className="flex justify-between">
-        <h1 className="text-lg font-bold">Nikki</h1>
-        {icon}
-      </nav>
+    <header className="flex justify-between">
+      <h1 className="text-lg font-bold">Nikki</h1>
+      {icon}
     </header>
   );
 };

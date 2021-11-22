@@ -21,16 +21,12 @@ export const DailyAdd: FC = () => {
 
   const handleMouseUp = () => {
     const selection = window.getSelection()?.toString();
-    if (selection && selection?.length > 0) {
-      dispatch({ type: selectedWord.type, payload: selection });
-    }
+    dispatch({ type: selectedWord.type, payload: selection });
   };
 
   const handleKeyUp = () => {
     const selection = window.getSelection()?.toString();
-    if (selection && selection?.length > 0) {
-      dispatch({ type: selectedWord.type, payload: selection });
-    }
+    dispatch({ type: selectedWord.type, payload: selection });
   };
 
   return (

@@ -20,11 +20,34 @@ let dailyList = [
   },
 ];
 
+const wordList = [
+  {
+    __typename: "Word",
+    id: "35",
+    text: "fsdfasdf",
+    translation: "",
+  },
+  {
+    __typename: "Word",
+    id: "34",
+    text: "こんにちは",
+    translation: "hello",
+  },
+];
+
 export const handlers = [
   graphql.query("FetchDailies", (req, res, ctx) => {
     return res(
       ctx.data({
         dailies: dailyList,
+      })
+    );
+  }),
+
+  graphql.query("FetchWords", (req, res, ctx) => {
+    return res(
+      ctx.data({
+        words: wordList,
       })
     );
   }),

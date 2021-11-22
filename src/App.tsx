@@ -6,7 +6,9 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
+import { PageDailies } from './components/pages/PageDailies';
 import { PageHome } from './components/pages/PageHome';
+import { PageWords } from './components/pages/PageWords';
 import { Auth } from './features/auth/Auth';
 import { Confirm } from './features/auth/Confirm';
 
@@ -25,6 +27,8 @@ const App: FC = () => {
          */}
 
         <Route exact path="/home" component={PageHome}></Route>
+        <Route exact path="/dailies" component={PageDailies}></Route>
+        <Route exact path="/words" component={PageWords}></Route>
         <Route exact path="/auth" component={Auth}></Route>
         <Route exact path="/confirm" component={Confirm} />
         <Route exact path="/">

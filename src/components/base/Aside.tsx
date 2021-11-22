@@ -5,6 +5,7 @@ import { DailyAddWord } from '../../features/daily/components/DailyAddWord';
 import {
   DailyWordGrammarSearchList,
 } from '../../features/daily/components/DailyWordGrammarSearchList';
+import { Nav } from './Nav';
 
 const StyledAside = styled.aside<{ show: boolean }>`
   position: fixed;
@@ -22,15 +23,21 @@ export const Aside: FC<{ onClick: () => void; show: boolean }> = ({
   show,
 }) => {
   return (
-    <StyledAside show={show} className="p-4">
-      <XIcon
-        role="icon"
-        aria-label="close icon"
-        onClick={onClick}
-        className="h-5 w-5 cursor-pointer ml-auto"
-      />
-      <DailyAddWord />
-      <DailyWordGrammarSearchList />
+    <StyledAside show={show} className="shadow-md">
+      <header className="p-4">
+        <XIcon
+          role="icon"
+          aria-label="close icon"
+          onClick={onClick}
+          className="h-5 w-5 cursor-pointer ml-auto"
+        />
+      </header>
+
+      <Nav />
+      <div className="p-4">
+        <DailyAddWord />
+        <DailyWordGrammarSearchList />
+      </div>
     </StyledAside>
   );
 };
