@@ -16,7 +16,8 @@
  * @type {Cypress.PluginConfig}
  */
 // plugins/index.js
-import dotenv from "dotenv";
+import * as dotenv from 'dotenv';
+
 dotenv.config({ path: "../../.env.local" });
 
 // eslint-disable-next-line no-unused-vars
