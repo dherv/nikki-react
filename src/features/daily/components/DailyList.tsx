@@ -17,17 +17,20 @@ export const DailyList: FC = () => {
     dispatch({ type: fetchDailiesRequest.type });
   }, [dispatch]);
 
+  const handleRemove = (id: string) => {
+    dispatch({ type: deleteDailyRequest.type, payload: id });
+  };
+
   if (loading) return <p>loading</p>;
   if (error) return <p>{error}</p>;
   return (
-    <ul>
+    <ul data-cy="dailyList">
       {dailies.map((d: Daily) => (
         <ListItem
           key={d.id}
+          id={d.id}
           text={d.text}
-          onClickDelete={() =>
-            dispatch({ type: deleteDailyRequest.type, payload: d.id })
-          }
+          onClickDelete={handleRemove}
         />
       ))}
     </ul>

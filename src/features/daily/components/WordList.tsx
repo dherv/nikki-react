@@ -16,21 +16,25 @@ export const WordList: FC = () => {
   const loading = useAppSelector(wordsLoadingSelector);
   const error = useAppSelector(wordsErrorSelector);
 
+  // TODO: can we cache this instead of fetching on every page load - react query instead / apollo client query ?
   useEffect(() => {
     dispatch({ type: fetchWordsRequest.type });
   }, [dispatch]);
 
+  const handleRemove = (id: string) => {
+    dispatch({ type: deleteWordRequest.type, payload: id });
+  };
+
   if (loading) return <p>loading</p>;
   if (error) return <p>{error}</p>;
   return (
-    <ul>
+    <ul data-cy="wordList">
       {words.map((w: Word) => (
         <ListItem
           key={w.id}
+          id={w.id}
           text={w.text}
-          onClickDelete={() =>
-            dispatch({ type: deleteWordRequest.type, payload: w.id })
-          }
+          onClickDelete={handleRemove}
         />
       ))}
     </ul>

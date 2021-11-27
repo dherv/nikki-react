@@ -15,7 +15,7 @@ export const DailyWordGrammarSearchList: FC = () => {
   };
 
   return (
-    <ul>
+    <ul data-cy="searchWordList">
       {words.map((w: IWord) => {
         const { id, text, translation } = w;
         return (

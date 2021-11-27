@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import { useAppDispatch } from '../../../app/hooks';
 import { IWord } from '../../../app/types';
+import { ListItem } from '../../../components/base/ListItem';
 import { formRemoveWord } from '../dailySlice';
 
 export const DailyWordGrammarList: FC = () => {
@@ -15,17 +16,13 @@ export const DailyWordGrammarList: FC = () => {
   };
 
   return (
-    <ul>
+    <ul data-cy="dailyWordList">
       {words.map((w: IWord) => (
-        <>
-          <li>
-            <span>{w.text}</span>
-            <span> - </span>
-            <span>{w.translation}</span>
-          </li>
-
-          <button onClick={() => handleRemove(w.id)}>remove</button>
-        </>
+        <ListItem
+          id={w.id}
+          text={`${w.text} - ${w.translation}`}
+          onClickDelete={handleRemove}
+        />
       ))}
     </ul>
   );

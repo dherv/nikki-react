@@ -1,39 +1,6 @@
 // src/mocks/handlers.js
 import { graphql } from 'msw';
-
-let dailyList = [
-  {
-    id: "2",
-    text: "test",
-    translation: "",
-    words: [],
-    grammars: [],
-    __typename: "Daily",
-  },
-  {
-    id: "1",
-    text: "test",
-    translation: "",
-    words: [],
-    grammars: [],
-    __typename: "Daily",
-  },
-];
-
-const wordList = [
-  {
-    __typename: "Word",
-    id: "35",
-    text: "fsdfasdf",
-    translation: "",
-  },
-  {
-    __typename: "Word",
-    id: "34",
-    text: "こんにちは",
-    translation: "hello",
-  },
-];
+import { dailyList, wordList } from './';
 
 export const handlers = [
   graphql.query("FetchDailies", (req, res, ctx) => {
@@ -64,7 +31,7 @@ export const handlers = [
     };
 
     // add the item so it gets in the list in next call
-    dailyList = [newDaily, ...dailyList];
+    // dailyList = [newDaily, ...dailyList];
     return res(
       ctx.data({
         addDaily: newDaily,
