@@ -2,7 +2,6 @@ import { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { dailySelectedWord } from '../../features/daily/dailySlice';
-import { Aside } from '../base/Aside';
 import { Header } from '../base/Header';
 
 const StyledMain = styled.main<{ show: boolean }>`
@@ -29,12 +28,11 @@ export const Template: FC = ({ children }) => {
 
   return (
     <div className="p-4 h-screen bg-gray-50">
-      <Header onClick={() => setShow((prev) => !prev)} show={show} />
+      <Header />
       <div className="flex overflow-auto">
         <StyledMain className="p-4 mt-8" show={show}>
           {children}
         </StyledMain>
-        <Aside onClick={() => setShow(false)} show={show} />
       </div>
     </div>
   );
