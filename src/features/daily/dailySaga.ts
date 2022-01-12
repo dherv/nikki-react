@@ -1,5 +1,4 @@
-import { call, put, select, takeLatest } from '@redux-saga/core/effects';
-import { Grammar, Word } from '../../types/types';
+import { call, put, takeLatest } from '@redux-saga/core/effects';
 import {
   addDaily,
   deleteDaily,
@@ -12,7 +11,6 @@ import {
   addDailyFailure,
   addDailyRequest,
   addDailySuccess,
-  dailyFormSelector,
   dailySearchWordRequest,
   dailySearchWordSuccess,
   deleteDailyFailure,
@@ -49,26 +47,29 @@ function* handleFetchWords(): Generator {
   }
 }
 
-function* handleAddDaily(): Generator {
-  type Form = {
-    text: string;
-    translation: string;
-    words: Word[];
-    grammars: Grammar[];
-  };
+function* handleAddDaily(
+  action: ReturnType<typeof addDailyRequest>
+): Generator {
+  // type Form = {
+  //   text: string;
+  //   translation?: string;
+  //   words: Word[];
+  //   // grammars: Grammar[];
+  // };
+  // TODO: use action payload instead to get the form
   try {
-    const form = (yield select(dailyFormSelector)) as Form;
-    const dailyRequest = {
-      text: form.text,
-      translation: form.translation,
-      word: form.words,
-      grammar: form.grammars,
-    };
-    if (form.text) {
-      const response = yield call(addDaily, dailyRequest);
-      const payload = response;
-      yield put(addDailySuccess(payload));
-    }
+    // const form = (yield select(dailyFormSelector)) as Form;
+    // const dailyRequest = {
+    //   text: form.text,
+    //   translation: form.translation,
+    //   word: form.words,
+    //   grammar: form.grammars,
+    // };
+    // if (form.text) {
+    const response = yield call(addDaily, action.payload);
+    const payload = response;
+    yield put(addDailySuccess(payload));
+    // }
   } catch (e) {
     console.error({ e });
     yield put(addDailyFailure(e));
@@ -106,7 +107,7 @@ function* handleDeleteWord(action: any): Generator {
 
 export function* watcherDailiesSaga(): any {
   yield takeLatest(fetchDailiesRequest.type, handleFetchDailies);
-  yield takeLatest(addDailyRequest.type, handleAddDaily);
+  yield takeLatest(addDailyRequest, handleAddDaily);
   yield takeLatest(dailySearchWordRequest.type, handleDailySearchWord);
   yield takeLatest(fetchWordsRequest.type, handleFetchWords);
   yield takeLatest(deleteDailyRequest.type, handleDeleteDaily);

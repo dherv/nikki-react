@@ -1,48 +1,89 @@
-import { ChangeEvent, FC, MouseEvent } from 'react';
-import { RootStateOrAny, useSelector } from 'react-redux';
+import { ChangeEvent, FC, MouseEvent, useState } from 'react';
 import { useAppDispatch } from '../../../app/hooks';
-import { Button } from '../../../components/base/Button';
-import { addDailyRequest, formAddText, selectedWord } from '../dailySlice';
+import { Word } from '../../../app/types';
+import { addDailyRequest } from '../dailySlice';
+import { DailyAddTextForm } from './DailyAddTextForm';
+import { DailyAddWordList } from './DailyAddWordList';
+import { WordAdd } from './WordAdd';
 
 export const DailyAdd: FC = () => {
   const dispatch = useAppDispatch();
-  const value = useSelector((state: RootStateOrAny) => state.dailies.form.text);
+  const [dailyText, setDailyText] = useState<string>();
+  const [words, setWords] = useState<Word[]>();
+  const [selectedWord, setSelectedWord] = useState<string>("");
+  const [error, setError] = useState<string>();
 
-  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+  // move to form custom hook
+  const validate = () => {
+    if (!dailyText) {
+      setError("please enter a daily text");
+      return false;
+    }
+    return true;
+  };
+
+  // reset will reset the selectedWord which in turn close the modal
+  const reset = () => setSelectedWord("");
+
+  const handleSubmit = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    dispatch({
-      type: addDailyRequest.type,
-    });
+    validate();
+    if (dailyText) {
+      const dailyRequest = {
+        text: dailyText,
+        translation: "",
+        words: words,
+      };
+      dispatch(addDailyRequest(dailyRequest));
+    }
+    reset();
   };
 
+  // Textarea
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    dispatch({ type: formAddText.type, payload: event.target.value });
+    if (error && event.target.value !== "") {
+      setError("");
+    }
+    setDailyText(event.target.value);
   };
 
-  const handleMouseUp = () => {
+  const handleSelection = () => {
     const selection = window.getSelection()?.toString();
-    dispatch({ type: selectedWord.type, payload: selection });
+    if (selection) setSelectedWord(selection);
   };
 
-  const handleKeyUp = () => {
-    const selection = window.getSelection()?.toString();
-    dispatch({ type: selectedWord.type, payload: selection });
+  const handleAddWord = (word: Word) => {
+    const newWords = words ? [...words, word] : [word];
+    setWords(newWords);
+    reset();
   };
 
+  const handleRemoveWord = (id: string) => {
+    const newWords = words?.filter((w) => w.id !== id);
+    setWords(newWords);
+  };
+
+  const shouldShowModal = selectedWord !== "";
   return (
-    <form className="w-full	">
-      <textarea
-        rows={10}
-        id="daily"
-        name="daily"
-        aria-label="daily"
-        className="w-full p-4 my-4 text-gray-700 rounded shadow-lg resize-none focus:outline-none"
+    <>
+      <h2 className="mr-auto my-2 title">Add today's daily</h2>
+      <DailyAddTextForm
+        value={dailyText}
+        error={error}
+        onSubmit={handleSubmit}
         onChange={handleChange}
-        onMouseUp={handleMouseUp}
-        onKeyUp={handleKeyUp}
-        value={value}
-      ></textarea>
-      <Button onClick={handleClick}>submit</Button>
-    </form>
+        onSelection={handleSelection}
+      />
+      <DailyAddWordList
+        words={words}
+        onRemove={handleRemoveWord}
+      ></DailyAddWordList>
+      <WordAdd
+        show={shouldShowModal}
+        onSubmit={handleAddWord}
+        onClose={reset}
+        text={selectedWord}
+      />
+    </>
   );
 };

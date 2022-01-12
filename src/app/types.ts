@@ -1,19 +1,12 @@
-export interface Base {
+export interface WordBase {
   text: string;
   translation: string;
 }
-export interface IWord extends Base {
+export interface Word extends WordBase {
   id: string;
 }
-export interface IGrammar extends Base {
-  id: string;
-  title: string;
-  description: string;
-}
-
-export interface IDaily extends Base {
-  words: IWord[];
-  grammars: IGrammar[];
+export interface IDaily extends WordBase {
+  words: Word[];
 }
 
 export interface IDailyForm extends IDaily {

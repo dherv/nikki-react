@@ -1,9 +1,9 @@
 import { RootStateOrAny } from 'react-redux';
-import { createSelector, createSlice } from '@reduxjs/toolkit';
-import { IDailyForm, IGrammar, IWord } from '../../app/types';
+import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IDailyForm, Word } from '../../app/types';
 import { Daily } from '../../types/types';
 
-interface InitialState {
+export interface InitialState {
   loading: boolean;
   error: string | null;
   addLoading: boolean;
@@ -13,18 +13,17 @@ interface InitialState {
   selectedWord: string;
   delete: { loading: boolean; error: string | null };
   search: {
-    words: IWord[];
-    grammars: IGrammar[];
+    words: Word[];
     loading: boolean;
     error: string | null;
   };
   words: {
-    data: IWord[];
+    data: Word[];
     loading: boolean;
     error: string | null;
   };
 }
-const initialState: InitialState = {
+export const initialState: InitialState = {
   loading: false,
   error: null,
   addLoading: false,
@@ -36,10 +35,9 @@ const initialState: InitialState = {
     text: "",
     translation: "",
     words: [],
-    grammars: [],
     highlights: [],
   },
-  search: { words: [], grammars: [], loading: false, error: null },
+  search: { words: [], loading: false, error: null },
   words: { data: [], loading: false, error: null },
 };
 export const dailySlice = createSlice({
@@ -59,7 +57,14 @@ export const dailySlice = createSlice({
       state.error = action.payload.message;
       state.data = [];
     },
-    addDailyRequest: (state) => {
+    addDailyRequest: (
+      state,
+      action: PayloadAction<{
+        text: string;
+        translation?: string;
+        words?: Word[];
+      }>
+    ) => {
       state.addLoading = true;
     },
     addDailySuccess: (state, action) => {
@@ -82,21 +87,22 @@ export const dailySlice = createSlice({
     formAddTranslation: (state, action) => {
       state.form.translation = action.payload;
     },
-    formAddWord: (state, action) => {
+    formAddWordForm: (state, action) => {
       // TODO: use prepare function to add createdAt, in order to display in creation order words and grammars
-      state.form.words.push(action.payload);
+      const exist = state.form.words.findIndex(
+        (w) => w.id === action.payload.id
+      );
+      if (exist === -1) {
+        state.form.words.push(action.payload);
+      }
+
       state.selectedWord = initialState.selectedWord;
     },
     formRemoveWord: (state, action) => {
       const newWords = state.form.words.filter(
-        (word: IWord) => word.id !== action.payload
+        (word: Word) => word.id !== action.payload
       );
       state.form.words = newWords;
-    },
-    formAddGrammar: (state, action) => {
-      // TODO: use prepare function to add createdAt, in order to display in creation order words and grammars
-
-      state.form.grammars.push(action.payload);
     },
     formAddHighlight: (state, action) => {
       state.form.highlights.push(action.payload);
@@ -151,6 +157,9 @@ export const dailySlice = createSlice({
       state.delete.loading = false;
       state.delete.error = action.payload.message;
     },
+    searchWordClear: (state) => {
+      state.search.words = [];
+    },
   },
 });
 
@@ -163,9 +172,8 @@ export const {
   addDailyFailure,
   formAddText,
   formAddTranslation,
-  formAddWord,
+  formAddWordForm,
   formRemoveWord,
-  formAddGrammar,
   formAddHighlight,
   dailySearchWordRequest,
   dailySearchWordSuccess,
@@ -180,6 +188,7 @@ export const {
   deleteWordRequest,
   deleteWordSuccess,
   deleteWordFailure,
+  searchWordClear,
 } = dailySlice.actions;
 
 export default dailySlice.reducer;
